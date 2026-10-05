@@ -1,0 +1,16 @@
+# Environment variables and secrets
+.env
+*.env
+sybmon/.env
+
+# Build outputs
+sybmon/backend/target/
+**/target/
+**/dist/
+**/build/
+**/node_modules/
+
+# IDE / System files
+.vscode/
+.idea/
+*.log

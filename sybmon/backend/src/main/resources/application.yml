@@ -17,7 +17,7 @@ spring:
 monitor:
   poll-interval-ms: 30000
   retention-days: 14
-  encryption-key: "XrwY/RsfRIvHX1+l6RkMeeqUC5DxiCJr/xg7tZ701vY="
+  encryption-key: ${MONITOR_ENC_KEY:default-dev-key-change-in-prod}
   admin-user: admin
   admin-password: adminpassword123
   webhook-url:
