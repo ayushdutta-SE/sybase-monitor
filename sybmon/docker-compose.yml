@@ -1,0 +1,31 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: sybmon
+      MYSQL_USER: sybmon
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes: [mysql-data:/var/lib/mysql]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_PASSWORD}"]
+      interval: 5s
+      retries: 20
+  backend:
+    build: ./backend
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/sybmon
+      DB_USER: sybmon
+      DB_PASSWORD: ${DB_PASSWORD}
+      MONITOR_ENC_KEY: ${MONITOR_ENC_KEY}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ALERT_WEBHOOK_URL: ${ALERT_WEBHOOK_URL:-}
+    depends_on:
+      mysql: { condition: service_healthy }
+  frontend:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on: [backend]
+volumes:
+  mysql-data:
