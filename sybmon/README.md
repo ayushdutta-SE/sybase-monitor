@@ -5,7 +5,7 @@ Spring Boot collector + API, React dashboard, MySQL for history.
 ## Run
     cp .env.example .env     # fill in values; MONITOR_ENC_KEY = `openssl rand -base64 32`
     docker compose --env-file .env up --build
-    open http://localhost:8080   (login = ADMIN_USER / ADMIN_PASSWORD)
+    open http://localhost:8080   (login = admin / adminpassword123)
 
 ## Sybase-side setup (once per monitored ASE)
     create login sybmon with password '***'
